@@ -2,6 +2,18 @@
 
 This repository contains the implementation and documentation for an 8-bit processor. Below is the description of the Instruction Set Architecture (ISA) for the processor.
 
+## Instructions
+| Instruction | OpCode |
+|-------------|--------|
+| LOAD        | 000    |
+| AND         | 001    |
+| OR          | 010    |
+| XOR         | 011    |
+| STORE       | 100    |
+| ADD         | 101    |
+| SUB         | 110    |
+| MUL         | 111    |
+
 ## Addressing Modes
 | Addressing Mode | Value |
 |-----------------|-------|
