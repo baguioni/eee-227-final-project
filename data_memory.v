@@ -8,6 +8,7 @@ module data_memory(
 	output wire [7:0] ReadData 
 );
 	// 8-bit wide word
+	// 256-bytes storage
 	reg [7:0] memory [255:0];
 
 	// initialize memory values to 0

@@ -5,9 +5,9 @@ module cpu(
 );
 
     wire [7:0] PC_in, PC_out;
-    wire RegWrite, MemWrite, ResultSrc;
+    wire RegWriteEnable, MemWriteEnable, ResultSrc, AddressingMode;
 
-    wire [7:0] OutData1, OutData2, Result, WriteData, MemoryData;
+    wire [7:0] OutData1, OutData2, Result, WriteDataReg, WriteDataMem, MemoryData;
 
     program_counter program_counter(
         .CLK(CLK),
@@ -23,21 +23,18 @@ module cpu(
 
     control_unit control_unit(
         .OpCode(Instruction[15:13]),
-        .AddressingMode(Instruction[12]),
-        .Destination(Instruction[11:8]),
-        .Source(Instruction[7:0]),
-        .RegWrite(RegWrite),
-        .MemWrite(MemWrite),
-        .ResultSrc(ResultSrc)
+        .RegWriteEnable(RegWriteEnable),
+        .MemWriteEnable(MemWriteEnable),
+        .ResultSrc(ResultSrc),
     );
 
     register_file register_file(
         .CLK(CLK),
-        .WriteEnable(RegWrite),
+        .WriteEnable(RegWriteEnable),
         .WriteAddress(Instruction[11:8]), 
         .ReadAddress1(Instruction[7:4]),
         .ReadAddress2(Instruction[3:0]),
-        .WriteData(WriteData),
+        .WriteData(WriteDataReg),
         .OutData1(OutData1),
         .OutData2(OutData2)
     );
@@ -50,6 +47,7 @@ module cpu(
     );
 
     // if 1 then b else a
+    // Data from ALU or from Memory
     mux2x1 #(
 		.WIDTH(8)
     ) mux2x1_alu_mem (
@@ -59,21 +57,23 @@ module cpu(
 		.out(Result)
 	);	
 
+    // Data from ALU/Memory or Direct
     mux2x1 #(
 		.WIDTH(8)
     ) mux2x1_reg (
 		.a(Instruction[7:0]),
 		.b(Result), // Source
 		.sel(Instruction[12]), // Addressing Mode
-		.out(WriteData)
+		.out(WriteDataReg)
 	);	
 
     data_memory data_memory(
         .CLK(CLK),
         .Address(Instruction[7:0]),
-        .WriteData(OutData1),
-        .MemWriteEnable(MemWrite),
-        .ReadData(MemoryData) // From Reg to Data Memory
+        .WriteData(OutData1), // Reg File to Data Memory
+        .MemWriteEnable(MemWriteEnable),
+        .ReadData(MemoryData) // Data Memory to Reg File
     );
+
+
 endmodule
-// Focus first on arithmetic operations

@@ -25,7 +25,7 @@ This repository contains the implementation and documentation for an 8-bit proce
 ### Load Instructions
 | OpCode | Addressing Mode | Destination | Source |
 |--------|-----------------|-------------|--------|
-| Bits 15 - 13 | Bit 12       | Bits 11 - 8 | Bits 7 - 4 |
+| Bits 15 - 13 | Bit 12       | Bits 11 - 8 | Bits 7 - 0 |
 
 ### Store Instructions
 | OpCode | Addressing Mode | Source | Destination |

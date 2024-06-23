@@ -1,5 +1,3 @@
-`include "cla.v"
-
 module multiplier_unsigned (
     input [7:0] A, B,
     output [15:0] Prod
