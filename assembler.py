@@ -101,8 +101,10 @@ def main():
 
     try:
         machine_code = assemble(assembly_code)
-        for instruction in machine_code:
-            print(instruction)
+        with open('instruction.dat', 'w') as f:
+            for instruction in machine_code:
+                f.write(instruction + '\n')
+        print("Machine code successfully written to instruction.dat")
     except ValueError as e:
         print(e)
         sys.exit(1)

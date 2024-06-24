@@ -1,10 +1,10 @@
 module cpu(
     input CLK, RESET,
-    output [7:0] ALUResult, 
+    output [7:0] ALUResult,PC_in, PC_out,
     output [15:0] Instruction
 );
 
-    wire [7:0] PC_in, PC_out;
+    wire [7:0] PC_plus1;
     wire RegWriteEnable, MemWriteEnable, ResultSrc, AddressingMode;
 
     wire [7:0] OutData1, OutData2, Result, WriteDataReg, WriteDataMem, MemoryData;
@@ -16,6 +16,14 @@ module cpu(
         .PC_out(PC_out)
     );
 
+    adder adder_PCPlus1(
+        .a(PC_out),
+        .b(8'b1),
+        .out(PC_plus1)
+    );
+
+    assign PC_in = PC_plus1;
+
     instruction_memory instruction_memory(
         .Address(PC_out),
         .ReadData(Instruction)
@@ -25,7 +33,7 @@ module cpu(
         .OpCode(Instruction[15:13]),
         .RegWriteEnable(RegWriteEnable),
         .MemWriteEnable(MemWriteEnable),
-        .ResultSrc(ResultSrc),
+        .ResultSrc(ResultSrc)
     );
 
     register_file register_file(

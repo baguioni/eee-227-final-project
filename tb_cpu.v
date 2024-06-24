@@ -2,7 +2,7 @@
 module tb_cpu();
 	reg CLK, RESET;
 	reg [3:0] counter;
-	wire [7:0] ALUResult;
+	wire [7:0] ALUResult, PC_in, PC_out;
 	wire [15:0] Instruction;
 
 	// Instantiate the Unit Under Test (UUT)
@@ -10,7 +10,9 @@ module tb_cpu();
 		.CLK(CLK),
 		.RESET(RESET),
 		.Instruction(Instruction),
-		.ALUResult(ALUResult)
+		.ALUResult(ALUResult),
+		.PC_in(PC_in),
+		.PC_out(PC_out)
 	);
 
 	initial begin
@@ -27,9 +29,11 @@ module tb_cpu();
 	integer i;
 	always @(negedge CLK) begin
 		$display("Instruction: %b", Instruction);
+		$display("PC_in: %b", PC_in);
+		$display("PC_out: %b", PC_out);
 		$display("ALUResult: %b", $signed(ALUResult));
 
-		#50;
+		#100;
 		$finish;
 	end
 endmodule
