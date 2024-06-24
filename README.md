@@ -36,3 +36,43 @@ This repository contains the implementation and documentation for an 8-bit proce
 | OpCode | Addressing Mode | Destination | Source1 | Source2 |
 |--------|-----------------|-------------|---------|---------|
 | Bits 15 - 13 | Bit 12 (1)   | Bits 11 - 8 | Bits 7 - 4 | Bits 3 - 0 |
+
+
+## Assembler Documentation
+
+### Load Instructions
+- `<source>` can be an immediate value or memory address prefixed with `M`.
+
+#### Store Instructions
+- `<dest>` can be a memory address prefixed with `M` or a register.
+
+#### Arithmetic and Logical Instructions
+
+
+### Using the Assembler
+
+1. **Write Your Assembly Code**:
+   - Create a text file with your assembly code. For example, `program`.
+
+2. **Run the Assembler**:
+   - Open a terminal or command prompt.
+   - Navigate to the directory containing `assembler.py`.
+   - Run the assembler script with the assembly file as an argument:
+     ```
+     python assembler.py program
+     ```
+
+3. **Output**:
+   - The assembler will generate a file named `instruction.dat` containing the machine code.
+   - If there are any errors in the assembly code, they will be displayed with the line number for easy debugging.
+
+### Example Usage
+
+#### Input Assembly File (`program.asm`):
+```assembly
+LOAD R1 5
+LOAD R2 3
+SUB R0 R1 R2
+STORE R0 M1
+
+
