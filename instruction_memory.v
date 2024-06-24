@@ -6,7 +6,7 @@ module instruction_memory(
 );
 
 	// Fix this later to be 8 bit
-	reg [15:0] memory [63:0];
+	reg [15:0] memory [255:0];
 
 	initial begin
 		$display("Initializing instruction memory");

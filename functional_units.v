@@ -117,7 +117,7 @@ endmodule
 
 module multiplier_unsigned (
     input [7:0] A, B,
-    output [15:0] Prod
+    output [7:0] Prod
 );
     // partial products 
     wire [ 7:0] p0,p1,p2,p3,p4,p5,p6,p7;
@@ -145,5 +145,5 @@ module multiplier_unsigned (
     cla_8bit adder_5 ( .A({  c5,s5[7:1]}), .B(p6), .Cin(1'b0), .Sum(s6), .Cout(c6) );
     cla_8bit adder_6 ( .A({  c6,s6[7:1]}), .B(p7), .Cin(1'b0), .Sum(s7), .Cout(c7) );
 
-    assign Prod = {c7,s7,s6[0],s5[0],s4[0],s3[0],s2[0],s1[0],p0[0]};
+    assign Prod = {s7[0],s6[0],s5[0],s4[0],s3[0],s2[0],s1[0],p0[0]};
 endmodule

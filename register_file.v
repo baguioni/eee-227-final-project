@@ -23,7 +23,7 @@ module register_file(
 	always @(posedge CLK, WriteEnable) begin
 		if (WriteEnable == 1'b1) begin
 			registers[WriteAddress] <= WriteData;
-			$display("Register Write Occured - WriteData: %b WriteAddress: %b", WriteData, WriteAddress);
+			// $display("Register Write Occured - WriteData: %b WriteAddress: %b", WriteData, WriteAddress);
 		end
 	end
 
@@ -31,7 +31,7 @@ module register_file(
 		// Read can be done at anytime
 		OutData1 = registers[ReadAddress1];
 		OutData2 = registers[ReadAddress2];
-		$display("OutData1: %b OutData2: %b", OutData1, OutData2);
+		// $display("OutData1: %b OutData2: %b", OutData1, OutData2);
 	end
 
 

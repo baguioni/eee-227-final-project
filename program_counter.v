@@ -5,7 +5,7 @@ module program_counter(
 );
 	always @(posedge CLK) begin
 		if (RST) begin
-			PC_out <= 'd0;
+			PC_out <= 8'b0;
 		end else begin
 			PC_out <= PC_in;
 		end

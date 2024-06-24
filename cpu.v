@@ -1,6 +1,6 @@
 module cpu(
     input CLK, RESET,
-    output [7:0] ALUResult,PC_in, PC_out,
+    output [7:0] ALUResult, PC_in, PC_out,
     output [15:0] Instruction
 );
 

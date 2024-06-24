@@ -23,7 +23,7 @@ module data_memory(
 	// writes are synchronous operations
 	always @(posedge CLK) begin
 		if (MemWriteEnable == 1'b1) begin
-			$display("Address: %d Data: %d", Address, WriteData);
+		$display("Address: %d Data: %d", Address, WriteData);
 			memory[Address] <= WriteData;
 		end
 	end
