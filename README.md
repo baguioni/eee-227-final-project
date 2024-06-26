@@ -37,29 +37,25 @@ This repository contains the implementation and documentation for an 8-bit proce
 |--------|-----------------|-------------|---------|---------|
 | Bits 15 - 13 | Bit 12 (1)   | Bits 11 - 8 | Bits 7 - 4 | Bits 3 - 0 |
 
-
 ## Assembler Documentation
 
 ### Load Instructions
 - `<source>` can be an immediate value or memory address prefixed with `M`.
 
 #### Store Instructions
-- `<dest>` can be a memory address prefixed with `M` or a register.
-
-#### Arithmetic and Logical Instructions
-
+- `<dest>` is a memory address prefixed with `M`
 
 ### Using the Assembler
 
 1. **Write Your Assembly Code**:
-   - Create a text file with your assembly code. For example, `program`.
+   - Create a text file with your assembly code. For example, `test_program`.
 
 2. **Run the Assembler**:
    - Open a terminal or command prompt.
    - Navigate to the directory containing `assembler.py`.
    - Run the assembler script with the assembly file as an argument:
      ```
-     python assembler.py program
+     python assembler.py test_program
      ```
 
 3. **Output**:
@@ -74,5 +70,10 @@ LOAD R1 5
 LOAD R2 3
 SUB R0 R1 R2
 STORE R0 M1
+```
 
-
+## Verifying the processor RTL
+Assuming you have Icarus Verilog installed, run the following command in your terminal.
+```
+iverilog -o dsn tb_cpu.v alu.v cpu.v control_unit.v data_memory.v functional_units.v instruction_memory.v mux2-1.v program_counter.v register_file.v
+```
