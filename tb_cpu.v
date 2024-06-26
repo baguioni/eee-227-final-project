@@ -29,8 +29,6 @@ module tb_cpu();
 	integer i;
 	always @(negedge CLK) begin
 		$display("Instruction: %b", Instruction);
-		$display("PC_in: %b", PC_in);
-		$display("PC_out: %b", PC_out);
 		$display("ALUResult: %b", $signed(ALUResult));
 
 		#100;
